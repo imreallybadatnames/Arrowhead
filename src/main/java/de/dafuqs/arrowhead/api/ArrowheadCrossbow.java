@@ -1,5 +1,9 @@
 package de.dafuqs.arrowhead.api;
 
+/**
+ * Implement this interface to your CrossbowItem to get working reloading/shooting animations equal to a vanilla crossbow
+ * Additionally you can individualize a few properties to match your liking
+ */
 public interface ArrowheadCrossbow {
 
 	/**

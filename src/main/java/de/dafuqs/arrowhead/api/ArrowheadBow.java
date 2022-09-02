@@ -1,5 +1,9 @@
 package de.dafuqs.arrowhead.api;
 
+/**
+ * Implement this interface to your BowItem to get working pulling animations equal to a vanilla bow
+ * Additionally you can individualize a few properties to match your liking
+ */
 public interface ArrowheadBow {
 	
 	/**
