@@ -1,6 +1,7 @@
 package de.dafuqs.arrowhead.mixin;
 
 import de.dafuqs.arrowhead.api.ArrowheadBow;
+import de.dafuqs.arrowhead.api.BowShootingCallback;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
@@ -22,7 +23,11 @@ public class BowItemMixin {
 			locals = LocalCapture.CAPTURE_FAILHARD)
 	private void arrowhead$onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks, CallbackInfo ci, PlayerEntity playerEntity, boolean bl, ItemStack itemStack, int i, float f, boolean bl2, ArrowItem arrowItem, PersistentProjectileEntity persistentProjectileEntity) {
 		if(stack.getItem() instanceof ArrowheadBow arrowheadBow) {
-			persistentProjectileEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0F, f * 3.0F * arrowheadBow.getProjectileVelocityModifier(), arrowheadBow.getDivergence());
+			persistentProjectileEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0F, f * 3.0F * arrowheadBow.getProjectileVelocityModifier(), arrowheadBow.getDivergenceMod());
+		}
+		
+		for(BowShootingCallback callback : BowShootingCallback.callbacks) {
+			callback.trigger(world, playerEntity, stack, itemStack, remainingUseTicks, persistentProjectileEntity);
 		}
 	}
 	

@@ -22,7 +22,7 @@
     "arrowhead.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.14.9",
+    "fabricloader": ">=0.14.8",
     "minecraft": ">=1.18.2"
   }
 }

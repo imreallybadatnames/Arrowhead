@@ -21,9 +21,9 @@ public interface ArrowheadBow {
 	
 	/**
 	 * The lower this value, the more precise projectiles become
-	 * The normal bow has uses divergence of 1.0
+	 * The normal bow equals a divergence mod of 1.0
 	 */
-	default float getDivergence() {
+	default float getDivergenceMod() {
 		return 1.0F;
 	}
 	
