@@ -1,7 +1,5 @@
 package de.dafuqs.arrowhead.api;
 
-import net.minecraft.item.BowItem;
-
 public interface ArrowheadBow {
 	
 	/**
@@ -9,7 +7,7 @@ public interface ArrowheadBow {
 	 * The normal bow has a zoom of 20
 	 */
 	default float getZoom() {
-		return 30F;
+		return 20F;
 	}
 	
 	/**
@@ -18,7 +16,7 @@ public interface ArrowheadBow {
 	 * The normal bow equals a velocity mod of 1.0
 	 */
 	default float getProjectileVelocityModifier() {
-		return 1.3F;
+		return 1.0F;
 	}
 	
 	/**
@@ -26,7 +24,7 @@ public interface ArrowheadBow {
 	 * The normal bow has uses divergence of 1.0
 	 */
 	default float getDivergence() {
-		return 0.8F;
+		return 1.0F;
 	}
 	
 }

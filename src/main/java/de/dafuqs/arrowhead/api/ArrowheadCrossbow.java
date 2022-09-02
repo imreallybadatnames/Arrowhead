@@ -8,7 +8,7 @@ public interface ArrowheadCrossbow {
 	 * The normal crossbow equals a velocity mod of 1.0
 	 */
 	default float getProjectileVelocityModifier() {
-		return 1.5F;
+		return 1.0F;
 	}
 	
 	/**
@@ -16,7 +16,7 @@ public interface ArrowheadCrossbow {
 	 * The normal crossbow equals a pull time mod of 1.0
 	 */
 	default float getPullTimeModifier() {
-		return 2.0F;
+		return 1.0F;
 	}
 	
 }
