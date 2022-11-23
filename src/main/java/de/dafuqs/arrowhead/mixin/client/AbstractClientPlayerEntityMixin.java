@@ -32,7 +32,8 @@ public abstract class AbstractClientPlayerEntityMixin {
 			}
 			
 			f *= 1.0F - g * 0.15F;
-			cir.setReturnValue(MathHelper.lerp(MinecraftClient.getInstance().options.fovEffectScale, 1.0f, f));
+			
+			cir.setReturnValue(MathHelper.lerp((MinecraftClient.getInstance().options.getFovEffectScale().getValue()).floatValue(), 1.0F, f));
 		}
 		
 	}
