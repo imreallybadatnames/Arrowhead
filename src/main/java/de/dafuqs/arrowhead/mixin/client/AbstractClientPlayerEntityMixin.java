@@ -5,7 +5,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
-import net.minecraft.item.Item;
+import net.minecraft.item.*;
 import net.minecraft.util.math.MathHelper;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -20,10 +20,10 @@ public abstract class AbstractClientPlayerEntityMixin {
 	@Inject(method = "getFovMultiplier", at = @At(value = "TAIL"), locals = LocalCapture.CAPTURE_FAILSOFT, cancellable = true)
 	private void arrowhead$applyCustomBowZoom(CallbackInfoReturnable<Float> cir, float f) {
 		AbstractClientPlayerEntity thisPlayer = (AbstractClientPlayerEntity)(Object) this;
-		Item item = thisPlayer.getActiveItem().getItem();
-		if (thisPlayer.isUsingItem() && item instanceof ArrowheadBow arrowheadBow) {
+		ItemStack itemStack = thisPlayer.getActiveItem();
+		if (thisPlayer.isUsingItem() && itemStack.getItem() instanceof ArrowheadBow arrowheadBow) {
 			int i = thisPlayer.getItemUseTime();
-			float g = (float) i / arrowheadBow.getZoom();
+			float g = (float) i / arrowheadBow.getZoom(itemStack);
 			
 			if (g > 1.0F) {
 				g = 1.0F;

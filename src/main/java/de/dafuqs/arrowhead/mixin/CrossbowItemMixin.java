@@ -24,7 +24,7 @@ public class CrossbowItemMixin {
 	@Inject(method = "getSpeed(Lnet/minecraft/item/ItemStack;)F", at = @At("RETURN"), cancellable = true)
 	private static void getSpeed(ItemStack stack, CallbackInfoReturnable<Float> cir) {
 		if(stack.getItem() instanceof ArrowheadCrossbow arrowheadCrossbow) {
-			float speedMod = arrowheadCrossbow.getProjectileVelocityModifier();
+			float speedMod = arrowheadCrossbow.getProjectileVelocityModifier(stack);
 			if (speedMod != 1.0) {
 				cir.setReturnValue((float) Math.ceil(speedMod * (cir.getReturnValue())));
 			}
@@ -34,7 +34,7 @@ public class CrossbowItemMixin {
 	@Inject(method = "getPullTime(Lnet/minecraft/item/ItemStack;)I", at = @At("RETURN"), cancellable = true)
 	private static void getPullTime(ItemStack stack, CallbackInfoReturnable<Integer> cir) {
 		if (stack.getItem() instanceof ArrowheadCrossbow arrowheadCrossbow) {
-			cir.setReturnValue((int) Math.ceil(cir.getReturnValueI() * arrowheadCrossbow.getPullTimeModifier()));
+			cir.setReturnValue((int) Math.ceil(cir.getReturnValueI() * arrowheadCrossbow.getPullTimeModifier(stack)));
 		}
 	}
 	
@@ -43,7 +43,7 @@ public class CrossbowItemMixin {
 			locals = LocalCapture.CAPTURE_FAILHARD)
 	private static void shoot(World world, LivingEntity shooter, Hand hand, ItemStack crossbow, ItemStack projectile, float soundPitch, boolean creative, float speed, float divergence, float simulated, CallbackInfo ci, boolean bl, ProjectileEntity projectileEntity, Vec3d vec3d, Quaternion quaternion, Vec3d vec3d2, Vec3f vec3f) {
 		if(crossbow.getItem() instanceof ArrowheadCrossbow arrowheadCrossbow) {
-			projectileEntity.setVelocity(vec3f.getX(), vec3f.getY(), vec3f.getZ(), speed * arrowheadCrossbow.getProjectileVelocityModifier(), divergence * arrowheadCrossbow.getDivergenceMod());
+			projectileEntity.setVelocity(vec3f.getX(), vec3f.getY(), vec3f.getZ(), speed * arrowheadCrossbow.getProjectileVelocityModifier(crossbow), divergence * arrowheadCrossbow.getDivergenceMod(crossbow));
 		}
 		
 		for(CrossbowShootingCallback callback : CrossbowShootingCallback.callbacks) {

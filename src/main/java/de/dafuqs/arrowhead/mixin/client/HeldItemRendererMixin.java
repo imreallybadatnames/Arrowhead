@@ -60,7 +60,7 @@ public abstract class HeldItemRendererMixin {
 		boolean bl = item1 instanceof ArrowheadBow || item2 instanceof ArrowheadBow;
 		boolean bl2 = item1 instanceof ArrowheadCrossbow || item2 instanceof ArrowheadCrossbow;
 		if (!bl && !bl2) {
-			// normal behavior
+			// vanilla behavior
 		} else if (player.isUsingItem()) {
 			cir.setReturnValue(HeldItemRendererMixin.invokeGetUsingItemHandRenderType(player));
 		} else {

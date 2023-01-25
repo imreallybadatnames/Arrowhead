@@ -23,7 +23,7 @@ public class BowItemMixin {
 			locals = LocalCapture.CAPTURE_FAILHARD)
 	private void arrowhead$onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks, CallbackInfo ci, PlayerEntity playerEntity, boolean bl, ItemStack itemStack, int i, float f, boolean bl2, ArrowItem arrowItem, PersistentProjectileEntity persistentProjectileEntity) {
 		if(stack.getItem() instanceof ArrowheadBow arrowheadBow) {
-			persistentProjectileEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0F, f * 3.0F * arrowheadBow.getProjectileVelocityModifier(), arrowheadBow.getDivergenceMod());
+			persistentProjectileEntity.setVelocity(playerEntity, playerEntity.getPitch(), playerEntity.getYaw(), 0.0F, f * 3.0F * arrowheadBow.getProjectileVelocityModifier(stack), arrowheadBow.getDivergenceMod(stack));
 		}
 		
 		for(BowShootingCallback callback : BowShootingCallback.callbacks) {
