@@ -9,7 +9,7 @@ import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.item.HeldItemRenderer;
-import net.minecraft.client.render.model.json.ModelTransformation;
+import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.CrossbowItem;
@@ -18,7 +18,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Arm;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3f;
+import net.minecraft.util.math.RotationAxis;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -39,7 +39,7 @@ public abstract class HeldItemRendererMixin {
 	
 	@Shadow protected abstract void applySwingOffset(MatrixStack matrices, Arm arm, float swingProgress);
 	
-	@Shadow public abstract void renderItem(LivingEntity entity, ItemStack stack, ModelTransformation.Mode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light);
+	@Shadow public abstract void renderItem(LivingEntity entity, ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light);
 	
 	@Shadow
 	private static boolean isChargedCrossbow(ItemStack stack) {
@@ -100,9 +100,9 @@ public abstract class HeldItemRendererMixin {
 			if (player.isUsingItem() && player.getItemUseTimeLeft() > 0 && player.getActiveHand() == hand) {
 				this.applyEquipOffset(matrices, arm, equipProgress);
 				matrices.translate(((float)i * -0.4785682F), -0.0943870022892952D, 0.05731530860066414D);
-				matrices.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(-11.935F));
-				matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion((float)i * 65.3F));
-				matrices.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion((float)i * -9.785F));
+				matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(-11.935F));
+				matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees((float)i * 65.3F));
+				matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees((float)i * -9.785F));
 				float f = (float)item.getMaxUseTime() - ((float)this.client.player.getItemUseTimeLeft() - tickDelta + 1.0F);
 				float g = f / (float)CrossbowItem.getPullTime(item);
 				if (g > 1.0F) {
@@ -118,7 +118,7 @@ public abstract class HeldItemRendererMixin {
 				
 				matrices.translate((g * 0.0F), (g * 0.0F), (g * 0.04F));
 				matrices.scale(1.0F, 1.0F, 1.0F + g * 0.2F);
-				matrices.multiply(Vec3f.NEGATIVE_Y.getDegreesQuaternion((float)i * 45.0F));
+				matrices.multiply(RotationAxis.NEGATIVE_Y.rotationDegrees((float)i * 45.0F));
 			} else {
 				float f = -0.4F * MathHelper.sin(MathHelper.sqrt(swingProgress) * 3.1415927F);
 				float g = 0.2F * MathHelper.sin(MathHelper.sqrt(swingProgress) * 6.2831855F);
@@ -128,11 +128,11 @@ public abstract class HeldItemRendererMixin {
 				this.applySwingOffset(matrices, arm, swingProgress);
 				if (bl2 && swingProgress < 0.001F && bl) {
 					matrices.translate(((float)i * -0.641864F), 0.0D, 0.0D);
-					matrices.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion((float)i * 10.0F));
+					matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees((float)i * 10.0F));
 				}
 			}
 			
-			this.renderItem(player, item, bl3 ? ModelTransformation.Mode.FIRST_PERSON_RIGHT_HAND : ModelTransformation.Mode.FIRST_PERSON_LEFT_HAND, !bl3, matrices, vertexConsumers, light);
+			this.renderItem(player, item, bl3 ? ModelTransformationMode.FIRST_PERSON_RIGHT_HAND : ModelTransformationMode.FIRST_PERSON_LEFT_HAND, !bl3, matrices, vertexConsumers, light);
 			ci.cancel();
 		}
 	}
