@@ -7,10 +7,10 @@ import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
-import net.minecraft.util.math.Quaternion;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.Vec3f;
 import net.minecraft.world.World;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -41,9 +41,9 @@ public class CrossbowItemMixin {
 	@Inject(method = "shoot(Lnet/minecraft/world/World;Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/util/Hand;Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;FZFFF)V",
 			at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/projectile/ProjectileEntity;setVelocity(DDDFF)V", shift = At.Shift.AFTER),
 			locals = LocalCapture.CAPTURE_FAILHARD)
-	private static void shoot(World world, LivingEntity shooter, Hand hand, ItemStack crossbow, ItemStack projectile, float soundPitch, boolean creative, float speed, float divergence, float simulated, CallbackInfo ci, boolean bl, ProjectileEntity projectileEntity, Vec3d vec3d, Quaternion quaternion, Vec3d vec3d2, Vec3f vec3f) {
+	private static void shoot(World world, LivingEntity shooter, Hand hand, ItemStack crossbow, ItemStack projectile, float soundPitch, boolean creative, float speed, float divergence, float simulated, CallbackInfo ci, boolean bl, ProjectileEntity projectileEntity, Vec3d vec3d, Quaternionf quaternion, Vec3d vec3d2, Vector3f vec3f) {
 		if(crossbow.getItem() instanceof ArrowheadCrossbow arrowheadCrossbow) {
-			projectileEntity.setVelocity(vec3f.getX(), vec3f.getY(), vec3f.getZ(), speed * arrowheadCrossbow.getProjectileVelocityModifier(crossbow), divergence * arrowheadCrossbow.getDivergenceMod(crossbow));
+			projectileEntity.setVelocity(vec3f.x(), vec3f.y(), vec3f.z(), speed * arrowheadCrossbow.getProjectileVelocityModifier(crossbow), divergence * arrowheadCrossbow.getDivergenceMod(crossbow));
 		}
 		
 		for(CrossbowShootingCallback callback : CrossbowShootingCallback.callbacks) {
