@@ -133,6 +133,9 @@ public abstract class HeldItemRendererMixin {
 			}
 			
 			this.renderItem(player, item, bl3 ? ModelTransformation.Mode.FIRST_PERSON_RIGHT_HAND : ModelTransformation.Mode.FIRST_PERSON_LEFT_HAND, !bl3, matrices, vertexConsumers, light);
+			
+			matrices.pop();
+			
 			ci.cancel();
 		}
 	}
