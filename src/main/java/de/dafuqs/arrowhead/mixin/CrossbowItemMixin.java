@@ -1,5 +1,6 @@
 package de.dafuqs.arrowhead.mixin;
 
+import com.llamalad7.mixinextras.sugar.Local;
 import de.dafuqs.arrowhead.api.ArrowheadCrossbow;
 import de.dafuqs.arrowhead.api.CrossbowShootingCallback;
 import net.minecraft.entity.LivingEntity;
@@ -39,9 +40,8 @@ public class CrossbowItemMixin {
 	}
 	
 	@Inject(method = "shoot(Lnet/minecraft/world/World;Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/util/Hand;Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;FZFFF)V",
-			at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/projectile/ProjectileEntity;setVelocity(DDDFF)V", shift = At.Shift.AFTER),
-			locals = LocalCapture.CAPTURE_FAILHARD)
-	private static void shoot(World world, LivingEntity shooter, Hand hand, ItemStack crossbow, ItemStack projectile, float soundPitch, boolean creative, float speed, float divergence, float simulated, CallbackInfo ci, boolean bl, ProjectileEntity projectileEntity, Vec3d vec3d, Quaternionf quaternion, Vec3d vec3d2, Vector3f vec3f) {
+			at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/projectile/ProjectileEntity;setVelocity(DDDFF)V", shift = At.Shift.AFTER))
+	private static void shoot(World world, LivingEntity shooter, Hand hand, ItemStack crossbow, ItemStack projectile, float soundPitch, boolean creative, float speed, float divergence, float simulated, CallbackInfo ci, @Local ProjectileEntity projectileEntity, @Local Vector3f vec3f) {
 		if(crossbow.getItem() instanceof ArrowheadCrossbow arrowheadCrossbow) {
 			projectileEntity.setVelocity(vec3f.x(), vec3f.y(), vec3f.z(), speed * arrowheadCrossbow.getProjectileVelocityModifier(crossbow), divergence * arrowheadCrossbow.getDivergenceMod(crossbow));
 		}
