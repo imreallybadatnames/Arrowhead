@@ -9,6 +9,7 @@ import org.spongepowered.asm.mixin.Unique;
 public class ProjectileEntityMixin implements LastCrossbowVelocityStore {
     @Unique
     private Vector3f arrowhead$lastCrossbowVelocity;
+
     @Override
     public Vector3f arrowhead$getLastCrossbowVelocity() {
         return arrowhead$lastCrossbowVelocity;
