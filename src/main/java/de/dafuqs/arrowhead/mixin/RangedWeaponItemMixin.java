@@ -26,7 +26,7 @@ public class RangedWeaponItemMixin {
     public void arrowhead$handleRangedWeapon(World world, LivingEntity shooter, Hand hand, ItemStack weaponStack, List<ItemStack> projectiles, float speed, float divergence, boolean critical, @Nullable LivingEntity target, CallbackInfo ci, float f, float g, float h, float i, int index, ItemStack projectileStack, float yaw, ProjectileEntity projectileEntity) {
         Item item = weaponStack.getItem();
         if (item instanceof BowItem) {
-            if(item instanceof ArrowheadBow arrowheadBow) {
+            if (item instanceof ArrowheadBow arrowheadBow) {
                 projectileEntity.setVelocity(shooter, shooter.getPitch(), shooter.getYaw(), 0.0F, f * 3.0F * arrowheadBow.getProjectileVelocityModifier(weaponStack), arrowheadBow.getDivergenceMod(weaponStack));
             }
 
@@ -34,7 +34,7 @@ public class RangedWeaponItemMixin {
                 callback.trigger(world, shooter, weaponStack, projectileStack, item.getMaxUseTime(weaponStack) - shooter.getItemUseTimeLeft(), (PersistentProjectileEntity) projectileEntity);
             }
         } else if (item instanceof CrossbowItem) {
-            if(item instanceof ArrowheadCrossbow arrowheadCrossbow) {
+            if (item instanceof ArrowheadCrossbow arrowheadCrossbow) {
                 Vector3f origVec = ((LastCrossbowVelocityStore) projectileEntity).arrowhead$getLastCrossbowVelocity();
                 projectileEntity.setVelocity(origVec.x(), origVec.y(), origVec.z(), speed * arrowheadCrossbow.getProjectileVelocityModifier(weaponStack), divergence * arrowheadCrossbow.getDivergenceMod(weaponStack));
             }
