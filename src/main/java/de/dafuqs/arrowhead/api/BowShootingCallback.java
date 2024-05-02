@@ -1,6 +1,6 @@
 package de.dafuqs.arrowhead.api;
 
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -16,13 +16,13 @@ public interface BowShootingCallback {
 	 * Fires after the projectile has gotten its initial velocity set and before vanilla enchantments are run
 	 * Only triggers serverside
 	 * @param world the world
-	 * @param player the player that shot the bow
+	 * @param shooter the shooter that shot the bow
 	 * @param weaponStack the bow stack
 	 * @param arrowStack the arrow stack that was shot
 	 * @param remainingUseTicks the remaining use time of the bow at the time of release
 	 * @param persistentProjectileEntity the projectile that was shot (initialized, but not yet spawned in the world)
 	 */
-	void trigger(World world, PlayerEntity player, ItemStack weaponStack, ItemStack arrowStack, int remainingUseTicks, PersistentProjectileEntity persistentProjectileEntity);
+	void trigger(World world, LivingEntity shooter, ItemStack weaponStack, ItemStack arrowStack, int remainingUseTicks, PersistentProjectileEntity persistentProjectileEntity);
 	
 	/**
 	 * Register a ProjectileLaunchCallback
