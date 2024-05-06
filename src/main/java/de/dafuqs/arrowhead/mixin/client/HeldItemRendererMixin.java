@@ -93,7 +93,7 @@ public abstract class HeldItemRendererMixin {
 			at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isOf(Lnet/minecraft/item/Item;)Z", ordinal = 1),
 			cancellable = true, locals = LocalCapture.CAPTURE_FAILHARD)
 	private void arrowhead$renderFirstPersonItem(AbstractClientPlayerEntity player, float tickDelta, float pitch, Hand hand, float swingProgress, ItemStack item, float equipProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci, boolean bl, Arm arm) {
-		if (item.getItem() instanceof ArrowheadCrossbow arrowheadCrossbow) {
+		if (item.getItem() instanceof ArrowheadCrossbow) {
 			boolean bl2 = CrossbowItem.isCharged(item);
 			boolean bl3 = arm == Arm.RIGHT;
 			int i = bl3 ? 1 : -1;
@@ -104,7 +104,7 @@ public abstract class HeldItemRendererMixin {
 				matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees((float)i * 65.3F));
 				matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees((float)i * -9.785F));
 				float f = (float)item.getMaxUseTime() - ((float)this.client.player.getItemUseTimeLeft() - tickDelta + 1.0F);
-				float g = f / (float) arrowheadCrossbow.getPullTime(item);
+				float g = f / (float)CrossbowItem.getPullTime(item);
 				if (g > 1.0F) {
 					g = 1.0F;
 				}

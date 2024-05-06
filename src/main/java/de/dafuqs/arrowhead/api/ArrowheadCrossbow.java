@@ -1,6 +1,5 @@
 package de.dafuqs.arrowhead.api;
 
-import net.minecraft.enchantment.*;
 import net.minecraft.item.*;
 
 /**
@@ -8,7 +7,7 @@ import net.minecraft.item.*;
  * Additionally you can individualize a few properties to match your liking
  */
 public interface ArrowheadCrossbow {
-	
+
 	/**
 	 * The higher this value, the more velocity the shot projectile gets
 	 * Note that this directly relates to damage with most projectiles, like arrows
@@ -19,12 +18,11 @@ public interface ArrowheadCrossbow {
 	}
 	
 	/**
-	 * The time in ticks the crossbow takes to load
-	 * This default equals the vanilla crossbow, but does not break on high levels of quick charge
+	 * The higher this value, the longer it takes for the crossbow to load
+	 * The normal crossbow equals a pull time mod of 1.0
 	 */
-	default int getPullTime(ItemStack stack) {
-		int i = EnchantmentHelper.getLevel(Enchantments.QUICK_CHARGE, stack);
-		return Math.max(1, i == 0 ? 25 : 25 - 5 * i);
+	default float getPullTimeModifier(ItemStack stack) {
+		return 1.0F;
 	}
 	
 	/**
