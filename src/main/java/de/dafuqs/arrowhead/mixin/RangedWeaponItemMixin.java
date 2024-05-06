@@ -35,7 +35,7 @@ public class RangedWeaponItemMixin {
             }
         } else if (item instanceof CrossbowItem) {
             if (item instanceof ArrowheadCrossbow arrowheadCrossbow) {
-                Vector3f origVec = projectileEntity.arrowhead$getLastCrossbowVelocity();
+                Vector3f origVec = ((LastCrossbowVelocityStore) projectileEntity).arrowhead$getLastCrossbowVelocity();
                 projectileEntity.setVelocity(origVec.x(), origVec.y(), origVec.z(), speed * arrowheadCrossbow.getProjectileVelocityModifier(weaponStack), divergence * arrowheadCrossbow.getDivergenceMod(weaponStack));
             }
 
