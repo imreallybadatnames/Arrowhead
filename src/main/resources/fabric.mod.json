@@ -26,6 +26,9 @@
   "custom": {
     "loom:injected_interfaces": {
       "net/minecraft/class_1676": ["de/dafuqs/arrowhead/mixin/LastCrossbowVelocityStore"]
+    },
+    "modmenu": {
+      "badges": [ "library" ]
     }
   }
 }
