@@ -1,5 +1,6 @@
 package de.dafuqs.arrowhead.mixin;
 
+import de.dafuqs.arrowhead.api.internal.LastCrossbowVelocityStore;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import org.joml.Vector3f;
 import org.spongepowered.asm.mixin.Mixin;

@@ -39,7 +39,7 @@ public class CrossbowItemMixin {
 	@Inject(method = "shoot(Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/entity/projectile/ProjectileEntity;IFFFLnet/minecraft/entity/LivingEntity;)V",
 			at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/projectile/ProjectileEntity;setVelocity(DDDFF)V", shift = At.Shift.AFTER), locals = LocalCapture.CAPTURE_FAILHARD)
 	private void shoot(LivingEntity shooter, ProjectileEntity projectile, int index, float speed, float divergence, float yaw, LivingEntity target, CallbackInfo ci, Vector3f vector3f) {
-		((LastCrossbowVelocityStore) projectile).arrowhead$setLastCrossbowVelocity(vector3f);
+		projectile.arrowhead$setLastCrossbowVelocity(vector3f);
 	}
 	
 }
